@@ -32,5 +32,10 @@
 		"vite": "^4.4.2",
 		"vitest": "^0.32.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@svelteuidev/composables": "^0.14.0",
+		"@svelteuidev/core": "^0.14.0",
+		"radix-icons-svelte": "^1.2.1"
+	}
 }

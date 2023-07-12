@@ -1,2 +1,4 @@
 <h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+There is nothing here yet, however you can check out<br />
+<a href="/auth/login">Login page</a><br />
+<a href="/auth/register">Register page</a>
