@@ -1,0 +1,10 @@
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnPaste": true,
+	"files.insertFinalNewline": true,
+	"editor.codeActionsOnSave": { "source.fixAll.eslint": true },
+	"editor.formatOnSave": true,
+	"files.autoSave": "onFocusChange",
+	"eslint.codeActionsOnSave.mode": "all",
+	"prettier.endOfLine": "crlf"
+}
