@@ -8,7 +8,7 @@
 	let password = '' as string;
 
 	async function login() {
-		await signInWithEmailAndPassword(firebaseAuth, email, password).then(() => {goto('/auth/login')});
+		await signInWithEmailAndPassword(firebaseAuth, email, password).then(() => {goto('/projects')});
 	}
 </script>
 
