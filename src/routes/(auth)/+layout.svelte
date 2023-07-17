@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Box, Flex, Title, Paper, Center, Text } from '@svelteuidev/core';
-	import LoginForm from './login/+page.svelte';
 </script>
 
 <Flex>

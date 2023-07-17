@@ -5,7 +5,12 @@
 	let showPassword = false;
 </script>
 
-<form method="POST" on:submit|preventDefault={() => {}}>
+<form
+	method="POST"
+	on:submit|preventDefault={() => {
+		console.log('login form submit');
+	}}
+>
 	<Center><Title order={1}>Log in</Title></Center>
 	<TextInput
 		placeholder="Email"
@@ -24,7 +29,7 @@
 			{/if}
 		</svelte:fragment>
 	</TextInput>
-	<Center><Button type="submit" color="#1CBC7F" size="lg">Submit</Button></Center>
+	<Center><Button color="#1CBC7F" size="lg">Submit</Button></Center>
 </form>
 
 <style>

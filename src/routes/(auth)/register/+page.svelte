@@ -6,7 +6,12 @@
 	let showPasswordTwo = false;
 </script>
 
-<form method="POST" on:submit|preventDefault={() => {}}>
+<form
+	method="POST"
+	on:submit|preventDefault={() => {
+		console.log('form is submitted');
+	}}
+>
 	<Center><Title order={1}>Sign up</Title></Center>
 	<TextInput placeholder="Name" size="lg" type="text" required />
 	<TextInput placeholder="Surname" size="lg" type="text" required />
@@ -14,7 +19,7 @@
 		placeholder="Email"
 		size="lg"
 		type="email"
-		pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+		pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
 		required
 	/>
 	<TextInput placeholder="Password" size="lg" type={showPasswordOne ? 'text' : 'password'} required>
@@ -44,7 +49,7 @@
 			{/if}
 		</svelte:fragment>
 	</TextInput>
-	<Center><Button type="submit" color="#1CBC7F" size="lg">Submit</Button></Center>
+	<Center><Button color="#1CBC7F" size="lg">Submit</Button></Center>
 </form>
 
 <style>
