@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
+	import { signInWithEmailAndPassword } from 'firebase/auth';
+	import { firebaseAuth } from '$lib/firebase';
+
+	import { goto } from '$app/navigation';
 
 	let email = '' as string;
 	let password = '' as string;
 
 	async function login() {
-		const auth = getAuth();
-		const { user } = await signInWithEmailAndPassword(auth, email, password);
-		console.log(user);
+		await signInWithEmailAndPassword(firebaseAuth, email, password).then(() => {goto('/auth/login')});
 	}
 </script>
 
