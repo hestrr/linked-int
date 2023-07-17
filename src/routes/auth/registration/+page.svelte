@@ -1,4 +1,5 @@
 <script lang="ts">
+    import {User} from "$lib/types";
     import {createUserWithEmailAndPassword} from 'firebase/auth';
     import {
         getFirestore,
@@ -20,12 +21,7 @@
         await createUserWithEmailAndPassword(firebaseAuth, email, password);
 
         const firestore = getFirestore() as Firestore;
-        const usersCollection = collection(firestore, 'users') as CollectionReference<{
-            name: string;
-            surname: string;
-            email: string;
-            username: string;
-        }>;
+        const usersCollection = collection(firestore, 'users') as CollectionReference<User>;
 
         await addDoc(usersCollection, {
             email: email,
