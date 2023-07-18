@@ -1,13 +1,8 @@
 <script lang="ts">
 	import type { User } from '$lib/types.d';
 	import { createUserWithEmailAndPassword } from 'firebase/auth';
-	import {
-		getFirestore,
-		addDoc,
-		collection,
-		Firestore,
-		CollectionReference
-	} from 'firebase/firestore';
+	import { getFirestore, addDoc, collection } from 'firebase/firestore';
+	import type { Firestore, CollectionReference } from 'firebase/firestore';
 	import { firebaseAuth } from '$lib/firebase';
 	import { goto } from '$app/navigation';
 

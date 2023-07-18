@@ -1,6 +1,5 @@
 <script>
-	import { SvelteUIProvider } from '@svelteuidev/core';
-	import { createTheme } from '@svelteuidev/core';
+	import { SvelteUIProvider, createTheme } from '@svelteuidev/core';
 	import '../app.css';
 
 	const customTheme = createTheme('custom-theme', {
