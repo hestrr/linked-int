@@ -1,4 +1,4 @@
-export enum GRADES {
+enum GRADES {
     BACHELOR_1,
     BACHELOR_2,
     BACHELOR_3,
@@ -10,7 +10,7 @@ export enum GRADES {
     POSTGRADUATE_3
 }
 
-export interface User {
+export declare type User = {
     username: string;
     name: string;
     surname: string;
@@ -24,10 +24,11 @@ export interface User {
     projects: [Project];
 }
 
-export interface Project {
+export declare type Project = {
     title: string;
     description: string;
     tags: [string];
     collaborators: [User];
 }
 
+export {}
