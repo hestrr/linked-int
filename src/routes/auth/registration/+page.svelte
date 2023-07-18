@@ -1,15 +1,8 @@
 <script lang="ts">
-    import type {User} from "$lib/types.d";
-    import {createUserWithEmailAndPassword} from 'firebase/auth';
-    import {
-        getFirestore,
-        addDoc,
-        collection,
-        Firestore,
-        CollectionReference
-    } from 'firebase/firestore';
-    import { firebaseAuth } from '$lib/firebase';
-    import { goto } from '$app/navigation';
+    import {register} from '$lib/firebaseAuth';
+    import {usersCollection} from "$lib/firebaseFirestore";
+    import {addDoc} from 'firebase/firestore';
+    import {goto} from '$app/navigation';
 
     let username = '' as string;
     let name = '' as string;
@@ -17,23 +10,22 @@
     let email = '' as string;
     let password = '' as string;
 
-    async function register() {
-        await createUserWithEmailAndPassword(firebaseAuth, email, password);
-
-        const firestore = getFirestore() as Firestore;
-        const usersCollection = collection(firestore, 'users') as CollectionReference<User>;
+    async function handleRegistration() {
+        await register(email, password);
 
         await addDoc(usersCollection, {
             email: email,
             username: username,
             name: name,
             surname: surname
-        }).then(() => {goto('/auth/login')});
+        }).then(() => {
+            goto('/projects')
+        });
     }
 </script>
 
 <h1>Registration</h1>
-<form on:submit|preventDefault={register}>
+<form on:submit|preventDefault={handleRegistration}>
     <label for="username">Username:</label>
     <input type="text" id="username" bind:value={username} required/>
     <br/>
