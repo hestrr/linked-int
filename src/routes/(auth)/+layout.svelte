@@ -1,35 +1,27 @@
 <script lang="ts">
-	import { Box, Flex, Title, Paper, Center, Text } from '@svelteuidev/core';
+	import { Flex, Title, Paper, Text } from '@svelteuidev/core';
 </script>
 
 <Flex>
-	<Box css={{ width: '60vw', height: '100vh', backgroundColor: '#D8F2F0' }}>
-		<Box css={{ width: '20vw', height: '70vh', marginTop: '15vh', marginLeft: '18vw' }}>
+	<div class="w-[60vw] h-[100vh] bg-[#D8F2F0]">
+		<div class="w-[20vw] h-[70vh] ml-[18vw] mt-[15vh]">
 			<slot />
-		</Box>
-	</Box>
-	<Box css={{ width: '40vw', height: '100vh', backgroundColor: '#B1EBD6' }}>
-		<Box css={{ width: '50%', margin: '7% 0 0 35%' }}
-			><Paper><Center><Title order={1}><b>LinkedIn't</b></Title></Center></Paper></Box
-		>
-		<div id="to-projects-link">
+		</div>
+	</div>
+	<div class="w-[40vw] h-screen bg-[#B1EBD6]">
+		<div class="w-1/2 ml-[35%] mt-[7%]">
+			<Paper class="flex justify-center"><Title order={1}><b>LinkedIn't</b></Title></Paper>
+		</div>
+		<div class="ml-[10%] mr-0 mt-[85%] mb-0">
 			<Text variant="link" color={'#646F70'} align="center" size="xl" underline>
 				No thanks, take me straight<br />
 				to the projects list
 			</Text>
 		</div>
-	</Box>
-	<img src={'/images/login_guy.png'} alt="" id="login-guy" />
+	</div>
+	<img
+		src={'/images/login_guy.png'}
+		alt=""
+		class="absolute w-[500px] ml-[50%] mr-0 mt-[10%] mb-0"
+	/>
 </Flex>
-
-<style>
-	#login-guy {
-		position: absolute;
-		margin: 10% 0 0 50%;
-		width: 500px;
-	}
-	#to-projects-link {
-		text-justify: center;
-		margin: 85% 0 0 10%;
-	}
-</style>

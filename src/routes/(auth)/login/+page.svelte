@@ -10,6 +10,7 @@
 	on:submit|preventDefault={() => {
 		console.log('login form submit');
 	}}
+	class="h-4/5 w-full flex flex-wrap flex-col justify-evenly mt-[60%]"
 >
 	<Center><Title order={1}>Log in</Title></Center>
 	<TextInput
@@ -29,17 +30,5 @@
 			{/if}
 		</svelte:fragment>
 	</TextInput>
-	<Center><Button color="#1CBC7F" size="lg">Submit</Button></Center>
+	<Center><Button type="submit" size="lg" class="bg-[#1CBC7F]">Submit</Button></Center>
 </form>
-
-<style>
-	form {
-		margin-top: 60%;
-		height: 80%;
-		width: 100%;
-		display: flex;
-		flex-wrap: wrap;
-		flex-direction: column;
-		justify-content: space-evenly;
-	}
-</style>
