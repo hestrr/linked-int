@@ -1,3 +1,3 @@
-# LinkedInt
+# linked-innot
 
-A service for students to find teammates for their projects
+Innopolis FWD elective course group project
