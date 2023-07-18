@@ -1,20 +1,22 @@
-enum GRADES {
+export enum GRADES {
     BACHELOR_1,
     BACHELOR_2,
     BACHELOR_3,
     BACHELOR_4,
     MASTER_1,
     MASTER_2,
+    MASTER_3,
     POSTGRADUATE_1,
     POSTGRADUATE_2,
     POSTGRADUATE_3
 }
 
-export declare type User = {
+export type User = {
     username: string;
     name: string;
     surname: string;
     email: string;
+    about: string;
     socials: {
         telegram: string | null;
         github: string | null;
@@ -24,11 +26,9 @@ export declare type User = {
     projects: [Project];
 }
 
-export declare type Project = {
+export type Project = {
     title: string;
     description: string;
     tags: [string];
     collaborators: [User];
 }
-
-export {}

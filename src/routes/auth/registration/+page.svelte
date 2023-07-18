@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {User} from "$lib/types";
+    import type {User} from "$lib/types.d";
     import {createUserWithEmailAndPassword} from 'firebase/auth';
     import {
         getFirestore,
