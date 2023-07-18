@@ -1,5 +1,7 @@
 <script lang="ts">
-    import {login} from '$lib/firebaseAuth';
+    import {register} from '$lib/firebaseAuth';
+    import {usersCollection} from "$lib/firebaseFirestore";
+    import {addDoc} from 'firebase/firestore';
     import {goto} from '$app/navigation';
 
     import { Button, TextInput, Title, Center, ActionIcon } from '@svelteuidev/core';
@@ -7,11 +9,21 @@
 
     let showPassword = false;
 
+    let username = '' as string;
+    let name = '' as string;
+    let surname = '' as string;
     let email = '' as string;
     let password = '' as string;
 
-    async function handleLogin() {
-        await login(email, password).then(() => {
+    async function handleRegistration() {
+        await register(email, password);
+
+        await addDoc(usersCollection, {
+            email: email,
+            username: username,
+            name: name,
+            surname: surname
+        }).then(() => {
             goto('/projects')
         });
     }
@@ -19,15 +31,18 @@
 
 <form
         method="POST"
-        on:submit|preventDefault={handleLogin}
-        class="h-4/5 w-full flex flex-wrap flex-col justify-evenly mt-[60%]"
+        on:submit|preventDefault={handleRegistration}
+        class="h-[110%] w-full flex flex-wrap flex-col justify-evenly"
 >
-    <Center><Title order={1}>Log in</Title></Center>
+    <Center><Title order={1}>Sign up</Title></Center>
+    <TextInput placeholder="Username" size="lg" type="text" required bind:value={username} />
+    <TextInput placeholder="Name" size="lg" type="text" required bind:value={name} />
+    <TextInput placeholder="Surname" size="lg" type="text" required bind:value={surname} />
     <TextInput
             placeholder="Email"
             size="lg"
             type="email"
-            pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
             required
             bind:value={email}
     />
