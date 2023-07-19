@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { Button, Flex, Stack } from '@svelteuidev/core';
 </script>
 
@@ -16,11 +17,13 @@
 		<Stack class="w-full h-1/4 mt-10 flex items-center" spacing="xl">
 			<Button
 				class="w-1/4 h-14 rounded-full bg-white text-[#31363F] text-2xl font-[500] hover:bg-gray-200"
-				variant="filled">Sign up</Button
+				variant="filled"
+				on:click={async () => await goto('/auth/register')}>Sign up</Button
 			>
 			<Button
 				class="w-1/4 h-14 rounded-full text-[#35484E] border-[#35484E] text-2xl font-[500]"
-				variant="outline">Log in</Button
+				variant="outline"
+				on:click={async () => await goto('/auth/login')}>Log in</Button
 			>
 		</Stack>
 		<Flex class="text-[#4D7F76] text-2xl w-1/2 ml-[25%] mt-[15%]" justify="space-around">
