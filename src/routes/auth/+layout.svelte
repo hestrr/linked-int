@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { Flex, Title, Paper, Text } from '@svelteuidev/core';
 </script>
 
@@ -10,10 +11,19 @@
 	</div>
 	<div class="w-[40vw] h-screen bg-[#B1EBD6]">
 		<div class="w-1/2 ml-[35%] mt-[7%]">
-			<Paper class="flex justify-center"><Title order={1}><b>LinkedIn't</b></Title></Paper>
+			<Paper class="flex justify-center"
+				><Title order={1} class="font-plex"><b>LinkedIn't</b></Title></Paper
+			>
 		</div>
 		<div class="ml-[10%] mr-0 mt-[85%] mb-0">
-			<Text variant="link" color={'#646F70'} align="center" size="xl" underline>
+			<Text
+				variant="link"
+				color={'#646F70'}
+				align="center"
+				size="xl"
+				underline
+				on:click={() => goto('/projects')}
+			>
 				No thanks, take me straight<br />
 				to the projects list
 			</Text>

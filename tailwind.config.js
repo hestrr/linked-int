@@ -9,5 +9,6 @@ export default {
 			inter: ['Inter', 'sans-serif']
 		}
 	},
-	plugins: []
+	plugins: [],
+	important: true
 };

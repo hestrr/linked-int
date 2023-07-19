@@ -3,9 +3,9 @@
 	import { Button, Flex, Stack } from '@svelteuidev/core';
 </script>
 
-<div class="flex">
+<div class="w-screen h-screen inline-flex">
 	<div
-		class="bg-gradient-to-br from-[#3AA0A6] to-[#A3FCC3] w-3/5 h-screen flex justify-center flex-col"
+		class="bg-gradient-to-br from-[#3AA0A6] to-[#A3FCC3] w-full overflow-hidden h-full flex justify-center flex-col"
 	>
 		<h1 class="text-5xl w-full font-plex text-[#31363F] flex justify-center mt-[15%]">
 			<b>
@@ -31,7 +31,7 @@
 			<a href="/projects">Go to projects</a>
 		</Flex>
 	</div>
-	<div class="bg-[#57C1B8] w-2/5 h-screen">
-		<img class="h-screen" src={'/images/homepage_pic.png'} alt="" />
+	<div class="bg-[#57C1B8] h-full aspect-[0.85] float-right">
+		<img class="h-full w-full" src={'/images/homepage_pic.png'} alt="" />
 	</div>
 </div>

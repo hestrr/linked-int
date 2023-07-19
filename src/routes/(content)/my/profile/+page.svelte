@@ -4,15 +4,24 @@
 	import Behance from '~icons/devicon-plain/behance';
 	import { GithubLogo } from 'radix-icons-svelte';
 
-	const Technologies = ['Web', 'React', 'Firebase', 'Spring', 'Blender', 'Photoshop'];
+	const Technologies = [
+		'Web',
+		'React',
+		'Firebase',
+		'Spring',
+		'Blender',
+		'Photoshop',
+		'My ass',
+		'Dick grayson'
+	];
 </script>
 
 <Paper class="mb-40">
 	<Flex align="center">
 		<Skeleton circle height={125} />
-		<Flex class="ml-10">
+		<Flex class="ml-[5%] w-[80%]" justify="space-between">
 			<Stack>
-				<Title order={1}>Name Surname</Title>
+				<Title order={1} class="font-[500]">Name Surname</Title>
 				<Text color="#6E6E6E">1st year student</Text>
 				<Paper
 					class="bg-[#E1F2F3] w-1/2 h-3 flex justify-center items-center rounded-xl py-3 px-2 text-[#67737E]"
@@ -20,7 +29,7 @@
 					Edit profile
 				</Paper>
 			</Stack>
-			<Flex class="w-36 -mt-16 ml-32" align="center" justify="space-evenly">
+			<Flex class="w-36 -mt-16 float-right mr-[5%]" align="center" justify="space-evenly">
 				<Telegram class="w-8 h-8" color="#6E6E6E" />
 				<GithubLogo class="w-8 h-8" color="#6E6E6E" />
 				<Behance class="w-8 h-8" color="#6E6E6E" />
@@ -28,7 +37,7 @@
 		</Flex>
 	</Flex>
 	<Stack class="mt-5">
-		<Title order={1} class="w-full">About me</Title>
+		<Title order={2} class="w-full font-[500] my-3">About</Title>
 		<Text
 			>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim porta dignissim.
 			Suspendisse eget lacus eget dolor commodo tempus. Vivamus porta diam enim, vel euismod leo
@@ -40,11 +49,11 @@
 		>
 	</Stack>
 	<Stack class="mt-5">
-		<Title order={1}>Technologies</Title>
-		<Flex justify="space-between">
+		<Title order={2} class="font-[500] my-3">Technologies</Title>
+		<Flex justify="flex-start" wrap="wrap">
 			{#each Technologies as technology}
 				<Paper
-					class="bg-[#CFE4F7] w-auto h-3 flex justify-center items-center rounded-xl py-3 px-6 text-[#67737E]"
+					class="bg-[#CFE4F7] w-auto h-3 flex justify-center items-center rounded-2xl py-4 px-6 text-[#67737E] font-[500] mb-5 mr-3"
 				>
 					{technology}
 				</Paper>
