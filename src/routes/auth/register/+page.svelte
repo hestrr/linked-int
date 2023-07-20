@@ -2,8 +2,8 @@
 	import type { User } from '$lib/types.d';
 
 	import { register } from '$lib/firebaseAuth';
-	import { usersCollection } from '$lib/firebaseFirestore';
-	import { addDoc } from 'firebase/firestore';
+	import { firestore } from '$lib/firebaseFirestore';
+	import { setDoc, doc } from 'firebase/firestore';
 	import { goto } from '$app/navigation';
 
 	import { Button, TextInput, Title, Center, ActionIcon } from '@svelteuidev/core';
@@ -18,9 +18,9 @@
 	let password = '' as string;
 
 	async function handleRegistration() {
-		await register(email, password);
+		let user = await register(email, password);
 
-		await addDoc(usersCollection, {
+		await setDoc(doc(firestore, '/users', user.uid), {
 			email: email,
 			username: username,
 			name: name,

@@ -6,5 +6,6 @@
 	"editor.formatOnSave": true,
 	"files.autoSave": "onFocusChange",
 	"eslint.codeActionsOnSave.mode": "all",
-	"prettier.endOfLine": "crlf"
+	"prettier.endOfLine": "crlf",
+	"tailwindCSS.emmetCompletions": true
 }
