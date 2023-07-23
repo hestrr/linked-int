@@ -7,6 +7,8 @@ import {
 	FIREBASE_ADMIN_CLIENT_EMAIL
 } from '$env/static/private';
 
+console.log(FIREBASE_ADMIN_PRIVATE_KEY);
+
 function makeApp() {
 	const apps = getApps();
 	if (apps.length > 0) {
