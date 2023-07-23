@@ -1,5 +1,4 @@
 import { initializeApp, getApps } from 'firebase/app';
-import type { FirebaseApp } from 'firebase/app';
 
 import {
 	PUBLIC_FIREBASE_PROJECT_ID,

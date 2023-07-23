@@ -17,7 +17,9 @@
 	import List from '~icons/ph/list-fill';
 	import Bell from '~icons/mdi/bell';
 	import { goto } from '$app/navigation';
-	import { firestore, FirebaseApp, User } from '$lib';
+	import { firestore } from '$lib/firebase/client';
+	import FirebaseApp from '$lib/components/FirebaseApp.svelte';
+	import User from '$lib/components/User.svelte';
 	import { auth } from '$lib/firebase/client';
 	import { logout } from '$lib/stores/auth';
 
