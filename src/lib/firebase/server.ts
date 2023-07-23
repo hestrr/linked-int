@@ -7,8 +7,6 @@ import {
 	FIREBASE_ADMIN_CLIENT_EMAIL
 } from '$env/static/private';
 
-console.log(FIREBASE_ADMIN_PRIVATE_KEY);
-
 function makeApp() {
 	const apps = getApps();
 	if (apps.length > 0) {
@@ -17,7 +15,7 @@ function makeApp() {
 
 	return initializeApp({
 		credential: cert({
-			privateKey: FIREBASE_ADMIN_PRIVATE_KEY,
+			privateKey: FIREBASE_ADMIN_PRIVATE_KEY.replace(/\\n/g, '\n'),
 			clientEmail: FIREBASE_ADMIN_CLIENT_EMAIL,
 			projectId: FIREBASE_ADMIN_PROJECT_ID
 		}),
