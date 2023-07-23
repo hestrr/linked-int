@@ -65,16 +65,14 @@
 		telegramLink = userData?.telegramLink;
 		behanceLink = userData?.behanceLink;
 		email = userData?.email;
-		tags = userData?.tags;
+		tags = userData?.tags ?? [];
 	});
 
 	let newTagValue: string;
 
 	function handleNewTag(e: KeyboardEvent) {
 		if (e.key !== 'Enter') return;
-		console.log(tags);
 		tags = [...tags, newTagValue];
-		console.log(tags);
 		newTagValue = '';
 	}
 
@@ -99,7 +97,7 @@
 	}
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
+<form>
 	<Paper class="mb-40">
 		<Flex align="center">
 			<Paper
@@ -176,14 +174,20 @@
 					on:keydown={handleNewTag}
 				/>
 				<Flex class="w-full flex-wrap [&>*]:mt-[2%] [&>*]:mr-[2%]">
-					{#each tags as tag}
-						<div class="bg-blue-100 px-4 py-2 rounded-2xl flex items-center max-h-16 w-auto">
-							{tag}
-							<button on:dblclick={() => handleDeleteTag(tag)}>
-								<Cross2 class="mt-[2%] ml-[2%] [color:gray] hover:[color:black]" size={20} />
-							</button>
+					{#if tags}
+						{#each tags as tag}
+							<div class="bg-blue-100 px-4 py-2 rounded-2xl flex items-center max-h-16 w-auto">
+								{tag}
+								<button type="button" on:dblclick={() => handleDeleteTag(tag)}>
+									<Cross2 class="mt-[2%] ml-[2%] [color:gray] hover:[color:black]" size={20} />
+								</button>
+							</div>
+						{/each}
+					{:else}
+						<div class="mt-5">
+							You haven't specified your technologies yet. It's time to fix it!
 						</div>
-					{/each}
+					{/if}
 				</Flex>
 			</div>
 		</Stack>
@@ -218,7 +222,8 @@
 			variant="subtle"
 			color="#19191D"
 			class="bg-[#B3E9D5] hover:bg-[#6bd9b3] ml-[5%] mt-[5%] rounded-3xl w-1/5 h-14 text-xl font-[500]"
-			type="submit"
+			type="button"
+			on:click={handleSubmit}
 		>
 			Save
 		</Button>

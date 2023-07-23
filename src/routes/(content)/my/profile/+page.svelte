@@ -62,13 +62,17 @@
 				<Stack class="mt-5">
 					<Title order={2} class="font-[500] my-3">Technologies</Title>
 					<Flex justify="flex-start" wrap="wrap">
-						{#each userData.tags as tag}
-							<Paper
-								class="bg-[#CFE4F7] w-auto h-3 flex justify-center items-center rounded-2xl py-4 px-6 text-[#67737E] font-[500] mb-5 mr-3"
-							>
-								{tag}
-							</Paper>
-						{/each}
+						{#if userData.tags}
+							{#each userData.tags as tag}
+								<Paper
+									class="bg-[#CFE4F7] w-auto h-3 flex justify-center items-center rounded-2xl py-4 px-6 text-[#67737E] font-[500] mb-5 mr-3"
+								>
+									{tag}
+								</Paper>
+							{/each}
+						{:else}
+							You haven't specified your technologies yet. It's time to fix it!
+						{/if}
 					</Flex>
 				</Stack>
 			</Paper>
