@@ -1,0 +1,2 @@
+логотип, заголовок главной страницы - https://fonts.google.com/specimen/IBM+Plex+Sans
+всё остальное - https://fonts.google.com/specimen/Inter
