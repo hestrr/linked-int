@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { DocumentReference, Firestore } from 'firebase/firestore';
-	import { docStore, sdk } from './stores';
+	import { sdk } from '../stores/sdk';
+	import { docStore } from '../stores/doc';
 
 	interface $$Slots {
 		default: { data: any; ref: DocumentReference | null };

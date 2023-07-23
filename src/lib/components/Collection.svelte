@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { CollectionReference, Firestore, Query } from 'firebase/firestore';
-	import { collectionStore, sdk } from './stores';
+	import { sdk } from '../stores/sdk';
+	import { collectionStore } from '../stores/collection';
 
 	interface $$Slots {
 		default: { data: any[]; ref: CollectionReference | Query | null; count: number };

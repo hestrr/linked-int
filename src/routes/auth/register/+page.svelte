@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { User } from '$lib/types.d';
 
-	import { register } from '$lib/firebaseAuth';
-	import { firestore } from '$lib/firebaseFirestore';
+	import { register } from '$lib/stores/auth';
+	import { firestore } from '$lib/firebase/client';
 	import { setDoc, doc } from 'firebase/firestore';
 	import { goto } from '$app/navigation';
 
@@ -34,7 +34,7 @@
 <form
 	method="POST"
 	on:submit|preventDefault={handleRegistration}
-	class="h-[110%] w-full flex flex-wrap flex-col justify-evenly"
+	class="flex h-[110%] w-full flex-col flex-wrap justify-evenly"
 >
 	<Center><Title order={1}>Sign up</Title></Center>
 	<TextInput placeholder="Username" size="lg" type="text" required bind:value={username} />

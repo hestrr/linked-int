@@ -17,7 +17,9 @@
 	import List from '~icons/ph/list-fill';
 	import Bell from '~icons/mdi/bell';
 	import { goto } from '$app/navigation';
-	import { auth, firestore, FirebaseApp, User, logout } from '$lib';
+	import { firestore, FirebaseApp, User } from '$lib';
+	import { auth } from '$lib/firebase/client';
+	import { logout } from '$lib/stores/auth';
 
 	// so typescript doesn't cry about the type "MagnifyingGlass" is not an SVG type
 	const MagnifyingGlassTS = MagnifyingGlass as unknown as undefined;
@@ -30,7 +32,7 @@
 			<TextInput
 				placeholder="Search"
 				icon={MagnifyingGlassTS}
-				class="w-1/4 ml-[8.5%]"
+				class="ml-[8.5%] w-1/4"
 				radius="xl"
 				variant="filled"
 			/>
@@ -38,31 +40,31 @@
 				<button on:click={() => logout()} class="ml-auto mr-44">
 					<Skeleton circle height={50} />
 				</button>
-				<div slot="signedOut" class="w-[17%] h-full ml-auto mr-[3%]">
-					<Flex class="w-full h-full" justify="space-between" align="center">
+				<div slot="signedOut" class="ml-auto mr-[3%] h-full w-[17%]">
+					<Flex class="h-full w-full" justify="space-between" align="center">
 						<Button
 							variant="outline"
 							color="#35484E"
 							on:click={() => goto('/auth/register')}
-							class="rounded-2xl px-5 hover:bg-gray-200  text-xl  font-[500]">Sign Up</Button
+							class="rounded-2xl px-5 text-xl  font-[500]  hover:bg-gray-200">Sign Up</Button
 						>
 						<Button
 							variant="subtle"
 							color="#35484E"
 							on:click={() => goto('/auth/login')}
-							class="rounded-2xl px-5 hover:bg-gray-200 text-xl font-[500]">Log in</Button
+							class="rounded-2xl px-5 text-xl font-[500] hover:bg-gray-200">Log in</Button
 						>
 					</Flex>
 				</div>
 			</User>
 		</Header>
-		<Navbar slot="navbar" class="h-full w-1/5 bg-[#EAF4F4] mt-6">
-			<Stack class="flex h-full ml-auto w-50" spacing="lg">
+		<Navbar slot="navbar" class="mt-6 h-full w-1/5 bg-[#EAF4F4]">
+			<Stack class="w-50 ml-auto flex h-full" spacing="lg">
 				<Button
 					variant="subtle"
 					color="gray"
 					size="xl"
-					class="hover:bg-[#EAF4F4] mr-auto h-auto  font-[500]"
+					class="mr-auto h-auto font-[500]  hover:bg-[#EAF4F4]"
 					on:click={() => goto('/projects')}
 				>
 					<List slot="leftIcon" color="#646F70" />Ongoing projects
@@ -71,7 +73,7 @@
 					variant="subtle"
 					color="gray"
 					size="xl"
-					class="hover:bg-[#EAF4F4] mr-auto h-auto font-[500]"
+					class="mr-auto h-auto font-[500] hover:bg-[#EAF4F4]"
 					on:click={() => goto('/my/projects')}
 				>
 					<BookmarkFilled slot="leftIcon" color="#646F70" />My projects
@@ -80,7 +82,7 @@
 					variant="subtle"
 					color="gray"
 					size="xl"
-					class="hover:bg-[#EAF4F4] mr-auto h-auto  font-[500]"
+					class="mr-auto h-auto font-[500]  hover:bg-[#EAF4F4]"
 					on:click={() => goto('/my/profile')}
 				>
 					<Person slot="leftIcon" color="#646F70" />Profile
@@ -89,7 +91,7 @@
 					variant="subtle"
 					color="gray"
 					size="xl"
-					class="hover:bg-[#EAF4F4] mr-auto h-auto  font-[500]"
+					class="mr-auto h-auto font-[500]  hover:bg-[#EAF4F4]"
 					on:click={() => goto('/my/notifications')}
 				>
 					<Bell slot="leftIcon" color="#646F70" />Notifications
@@ -97,7 +99,7 @@
 				<Button
 					variant="subtle"
 					color="#19191D"
-					class="bg-[#B3E9D5] hover:bg-[#B3E9D5] ml-auto mr-auto rounded-3xl w-10/12 h-16 text-xl font-[500]"
+					class="ml-auto mr-auto h-16 w-10/12 rounded-3xl bg-[#B3E9D5] text-xl font-[500] hover:bg-[#B3E9D5]"
 					on:click={() => goto('/projects/create')}
 				>
 					New Post

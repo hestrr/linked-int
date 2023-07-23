@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { login } from '$lib/firebaseAuth';
+	import { login } from '$lib/stores/auth';
 	import { goto } from '$app/navigation';
 
 	import { Button, TextInput, Title, Center, ActionIcon } from '@svelteuidev/core';
@@ -20,7 +20,7 @@
 <form
 	method="POST"
 	on:submit|preventDefault={handleLogin}
-	class="h-4/5 w-full flex flex-wrap flex-col justify-evenly mt-[60%]"
+	class="mt-[60%] flex h-4/5 w-full flex-col flex-wrap justify-evenly"
 >
 	<Center><Title order={1}>Log in</Title></Center>
 	<TextInput

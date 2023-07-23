@@ -34,19 +34,19 @@
 	<Paper class="flex mb-5 rounded-lg">
 		<Stack spacing="md" class="w-3/5">
 			<Title order={2} class="font-[600]">{project.name}</Title>
-			<p class="text-gray-500 font-[500]">{project.description}</p>
+			<p class="font-[500] text-gray-500">{project.description}</p>
 			<Group class="mt-6">
 				{#each project.tags as tag}
 					<Paper
-						class="bg-[#CFE4F7] w-auto h-3 flex justify-center items-center rounded-xl py-3 px-2 text-[#67737E] font-[500]"
+						class="flex h-3 w-auto items-center justify-center rounded-xl bg-[#CFE4F7] px-2 py-3 font-[500] text-[#67737E]"
 					>
 						{tag}
 					</Paper>
 				{/each}
 			</Group>
 		</Stack>
-		<Stack class="w-2/5 ml-auto mb-auto">
-			<Group class="w-full flex-row-reverse pr-12">
+		<Stack class="w-2/5 mb-auto ml-auto">
+			<Group class="flex-row-reverse w-full pr-12">
 				{#each project.participants.reverse() as participant}
 					<Stack>
 						<Skeleton circle height={50} />

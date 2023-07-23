@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Auth, User } from 'firebase/auth';
-	import { sdk, userStore } from './stores';
+	import { sdk } from '../stores/sdk';
+	import { userStore } from '../stores/user';
 
 	interface $$Slots {
 		default: { user: User };
