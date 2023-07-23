@@ -97,7 +97,7 @@
 				<Button
 					variant="subtle"
 					color="#19191D"
-					class="bg-[#B3E9D5] hover:bg-[#B3E9D5] ml-auto mr-auto rounded-3xl w-10/12 h-16 text-xl font-[500]"
+					class="bg-[#B3E9D5] hover:bg-[#6bd9b3] ml-auto mr-auto rounded-3xl w-10/12 h-16 text-xl font-[500]"
 					on:click={() => goto('/projects/create')}
 				>
 					New Post
