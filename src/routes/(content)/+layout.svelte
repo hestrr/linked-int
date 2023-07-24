@@ -26,13 +26,13 @@
 	<AppShell class="h-auto min-h-screen bg-[#EAF4F4]">
 		<Header slot="header" height={'75px'} class="flex items-center">
 			<Title class="ml-[6%] font-plex font-[600]"><b>LinkedIn't</b></Title>
-<!--			<TextInput-->
-<!--				placeholder="Search"-->
-<!--				icon={MagnifyingGlassTS}-->
-<!--				class="w-1/4 ml-[8.5%]"-->
-<!--				radius="xl"-->
-<!--				variant="filled"-->
-<!--			/>-->
+			<!--			<TextInput-->
+			<!--				placeholder="Search"-->
+			<!--				icon={MagnifyingGlassTS}-->
+			<!--				class="w-1/4 ml-[8.5%]"-->
+			<!--				radius="xl"-->
+			<!--				variant="filled"-->
+			<!--			/>-->
 			<User>
 				<button on:click={() => logout()} class="ml-auto mr-44">
 					<Skeleton circle height={50} />
