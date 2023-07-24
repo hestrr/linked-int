@@ -6,18 +6,6 @@
 	import { Doc, User, auth, firestore } from '$lib';
 	import FirebaseApp from '$lib/FirebaseApp.svelte';
 	import { goto } from '$app/navigation';
-	import Collection from '$lib/Collection.svelte';
-
-	const Technologies = [
-		'Web',
-		'React',
-		'Firebase',
-		'Spring',
-		'Blender',
-		'Photoshop',
-		'My ass',
-		'Dick grayson'
-	];
 </script>
 
 <FirebaseApp {auth} {firestore}>

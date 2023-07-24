@@ -178,7 +178,7 @@
 						{#each tags as tag}
 							<div class="bg-blue-100 px-4 py-2 rounded-2xl flex items-center max-h-16 w-auto">
 								{tag}
-								<button type="button" on:dblclick={() => handleDeleteTag(tag)}>
+								<button type="button" on:click={() => handleDeleteTag(tag)}>
 									<Cross2 class="mt-[2%] ml-[2%] [color:gray] hover:[color:black]" size={20} />
 								</button>
 							</div>
