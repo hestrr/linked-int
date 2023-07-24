@@ -2,11 +2,6 @@
 	import type { CollectionReference, Firestore, Query } from 'firebase/firestore';
 	import { collectionStore, sdk } from './stores';
 
-	interface $$Slots {
-		default: { data: any[]; ref: CollectionReference | Query | null; count: number };
-		loading: {};
-	}
-
 	export let ref: string | CollectionReference | Query;
 	export let firestore: Firestore = $sdk?.firestore;
 	export let startWith: any = undefined;

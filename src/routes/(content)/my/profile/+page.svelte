@@ -13,7 +13,7 @@
 </svelte:head>
 <FirebaseApp {auth} {firestore}>
 	<User let:user>
-		<Doc ref={`users/${user.uid}`} let:data={userData} let:ref={userDataRef}>
+		<Doc ref={`users/${user.uid}`} let:data={userData}>
 			<Paper class="mb-40">
 				<Flex align="center">
 					<Skeleton circle height={125} />

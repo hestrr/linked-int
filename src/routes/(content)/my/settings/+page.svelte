@@ -12,7 +12,7 @@
 	import Camera from '~icons/mdi/camera';
 	import Telegram from '~icons/fa6-brands/telegram';
 	import Behance from '~icons/devicon-plain/behance';
-	import { GithubLogo, Cross2, Keyboard } from 'radix-icons-svelte';
+	import { GithubLogo, Cross2 } from 'radix-icons-svelte';
 	import { auth, firestore } from '$lib';
 	import { doc, getDoc, setDoc } from 'firebase/firestore';
 	import { redirect } from '@sveltejs/kit';

@@ -1,3 +1,3 @@
 <svelte:head>
-    <title>My notifications | LinkedIn't</title>
+	<title>My notifications | LinkedIn't</title>
 </svelte:head>
