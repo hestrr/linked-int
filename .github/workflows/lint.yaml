@@ -1,0 +1,26 @@
+name: Check linting and formatting
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-linting-and-formatting:
+    name: Check linting and formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node.js v16
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm ci
+      - name: Format
+        run: npm run format
+      - name: Linter
+        run: npm run lint
+      - name: Check
+        run: npm run check
