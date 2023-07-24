@@ -65,7 +65,7 @@
 					class="hover:bg-[#EAF4F4] mr-auto h-auto  font-[500]"
 					on:click={() => goto('/projects')}
 				>
-					<List slot="leftIcon" color="#646F70" />Ongoing projects
+					<List slot="leftIcon" color="#646F70" />Explore projects
 				</Button>
 				<Button
 					variant="subtle"
