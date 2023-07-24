@@ -4,14 +4,14 @@
 		Navbar,
 		Header,
 		Title,
-		TextInput,
+		// TextInput,
 		Skeleton,
 		ShellSection,
 		Stack,
 		Button,
 		Flex
 	} from '@svelteuidev/core';
-	import { MagnifyingGlass } from 'radix-icons-svelte';
+	// import { MagnifyingGlass } from 'radix-icons-svelte';
 	import Person from '~icons/material-symbols/person';
 	import BookmarkFilled from '~icons/material-symbols/bookmark';
 	import List from '~icons/ph/list-fill';
@@ -19,21 +19,20 @@
 	import { goto } from '$app/navigation';
 	import { auth, firestore, FirebaseApp, User, logout } from '$lib';
 
-	// so typescript doesn't cry about the type "MagnifyingGlass" is not an SVG type
-	const MagnifyingGlassTS = MagnifyingGlass as unknown as undefined;
+	// const MagnifyingGlassTS = MagnifyingGlass as unknown as undefined;
 </script>
 
 <FirebaseApp {auth} {firestore}>
 	<AppShell class="h-auto min-h-screen bg-[#EAF4F4]">
 		<Header slot="header" height={'75px'} class="flex items-center">
 			<Title class="ml-[6%] font-plex font-[600]"><b>LinkedIn't</b></Title>
-			<TextInput
-				placeholder="Search"
-				icon={MagnifyingGlassTS}
-				class="w-1/4 ml-[8.5%]"
-				radius="xl"
-				variant="filled"
-			/>
+<!--			<TextInput-->
+<!--				placeholder="Search"-->
+<!--				icon={MagnifyingGlassTS}-->
+<!--				class="w-1/4 ml-[8.5%]"-->
+<!--				radius="xl"-->
+<!--				variant="filled"-->
+<!--			/>-->
 			<User>
 				<button on:click={() => logout()} class="ml-auto mr-44">
 					<Skeleton circle height={50} />
