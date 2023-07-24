@@ -4,36 +4,11 @@
 	import Collection from '$lib/Collection.svelte';
 	import Doc from '$lib/Doc.svelte';
 	import { Title, Skeleton, Stack, Paper, Group } from '@svelteuidev/core';
-
-	const projects = [
-		{
-			name: 'Very Awesome Name',
-			description: 'FWD Final project. Creative people welcomed',
-			tags: ['Web', 'React', 'Firebase'],
-			participants: ['Polina', 'Dias', 'Roman']
-		},
-		{
-			name: 'Very Awesome Name',
-			description:
-				'Image recognition capstone project. We are looking for someone who has experience with CV. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper ante efficitur malesuada accumsan.',
-			tags: ['AI/ML', 'TensorFlow', '4th year', 'Python', 'PostgreSQL'],
-			participants: ['Daniil', 'Adel']
-		},
-		{
-			name: 'Very Awesome Name',
-			description: 'FWD Final project. Creative people welcomed',
-			tags: ['Web', 'React', 'Firebase'],
-			participants: ['Polina', 'Dias', 'Roman']
-		},
-		{
-			name: 'Very Awesome Name',
-			description: 'FWD Final project. Creative people welcomed',
-			tags: ['Web', 'React', 'Firebase'],
-			participants: ['Polina', 'Dias', 'Roman']
-		}
-	];
 </script>
 
+<svelte:head>
+	<title>Projects | LinkedIn't</title>
+</svelte:head>
 <FirebaseApp {auth} {firestore}>
 	<Collection ref="/projects" let:data={projects}>
 		{#each projects as project}

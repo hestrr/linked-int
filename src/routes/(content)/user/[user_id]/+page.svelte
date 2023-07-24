@@ -1,19 +1,17 @@
 <script lang="ts">
-	import { Paper, Skeleton, Title, Flex, Stack, Text, Button } from '@svelteuidev/core';
+	import { Paper, Skeleton, Title, Flex, Stack, Text } from '@svelteuidev/core';
 	import Telegram from '~icons/fa6-brands/telegram';
 	import Behance from '~icons/devicon-plain/behance';
 	import { GithubLogo } from 'radix-icons-svelte';
 	import { Doc, User, auth, firestore } from '$lib';
 	import FirebaseApp from '$lib/FirebaseApp.svelte';
-	import { goto } from '$app/navigation';
+
+	export let data: { user_id: string };
 </script>
 
-<svelte:head>
-	<title>My profile | LinkedIn't</title>
-</svelte:head>
 <FirebaseApp {auth} {firestore}>
-	<User let:user>
-		<Doc ref={`users/${user.uid}`} let:data={userData}>
+	<User>
+		<Doc ref={`users/${data.user_id}`} let:data={userData}>
 			<Paper class="mb-40">
 				<Flex align="center">
 					<Skeleton circle height={125} />
@@ -24,12 +22,6 @@
 								{userData.surname}
 							</Title>
 							<Text color="#6E6E6E">1st year student</Text>
-							<Button
-								variant="subtle"
-								color="#67737E"
-								class="bg-[#E1F2F3] w-36 h-3 flex justify-center items-center rounded-xl py-3"
-								on:click={() => goto('/my/settings')}>Edit profile</Button
-							>
 						</Stack>
 						<Flex class="w-36 -mt-16 float-right mr-[5%]" align="center" justify="space-evenly">
 							{#if userData.telegramLink}
@@ -47,7 +39,7 @@
 				<Stack class="mt-5">
 					<Title order={2} class="w-full font-[500] my-3">About</Title>
 					<Text>
-						{userData.about ? userData.about : 'You can write something here'}</Text
+						{userData.about}</Text
 					>
 				</Stack>
 				<Stack class="mt-5">
@@ -62,12 +54,11 @@
 								</Paper>
 							{/each}
 						{:else}
-							You haven't specified your technologies yet. It's time to fix it!
+							No technologies
 						{/if}
 					</Flex>
 				</Stack>
 			</Paper>
 		</Doc>
-		<div slot="signedOut">Login to see your profile</div>
 	</User>
 </FirebaseApp>

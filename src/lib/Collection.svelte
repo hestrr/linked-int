@@ -4,7 +4,7 @@
 
 	interface $$Slots {
 		default: { data: any[]; ref: CollectionReference | Query | null; count: number };
-		loading: {};
+		loading: NonNullable<unknown>;
 	}
 
 	export let ref: string | CollectionReference | Query;

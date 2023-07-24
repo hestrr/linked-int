@@ -4,7 +4,7 @@
 
 	interface $$Slots {
 		default: { user: User };
-		signedOut: {};
+		signedOut: NonNullable<unknown>;
 	}
 
 	export let auth: Auth = $sdk?.auth;

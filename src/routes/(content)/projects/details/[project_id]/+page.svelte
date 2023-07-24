@@ -7,8 +7,8 @@
 </script>
 
 <FirebaseApp {auth} {firestore}>
-	<User let:user>
-		<Doc ref={`projects/${data.project_id}`} let:data={projectData} let:ref={projectDataRef}>
+	<User>
+		<Doc ref={`projects/${data.project_id}`} let:data={projectData}>
 			<Paper class="mb-40 rounded-xl px-[8%] py-[5%]">
 				<a href="/projects" class="flex items-center text-xl text-[#3C7E82]"
 					><LeftArrow class="-rotate-45 mr-3" color="#3C7E82" /> <b>Back to all projects</b></a

@@ -86,6 +86,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>New project | LinkedIn't</title>
+</svelte:head>
+
 <FirebaseApp {auth} {firestore}>
 	<User let:user>
 		<Paper class="mb-40 rounded-xl px-[8%] py-[5%]">

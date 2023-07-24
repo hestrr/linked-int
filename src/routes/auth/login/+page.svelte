@@ -17,6 +17,9 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Login | LinkedIn't</title>
+</svelte:head>
 <form
 	method="POST"
 	on:submit|preventDefault={handleLogin}
