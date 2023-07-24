@@ -100,7 +100,7 @@
 					class="bg-[#B3E9D5] hover:bg-[#6bd9b3] ml-auto mr-auto rounded-3xl w-10/12 h-16 text-xl font-[500]"
 					on:click={() => goto('/projects/create')}
 				>
-					New Post
+					Create project
 				</Button>
 			</Stack>
 		</Navbar>
