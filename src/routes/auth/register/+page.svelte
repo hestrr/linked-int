@@ -31,6 +31,9 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Registration | LinkedIn't</title>
+</svelte:head>
 <form
 	method="POST"
 	on:submit|preventDefault={handleRegistration}

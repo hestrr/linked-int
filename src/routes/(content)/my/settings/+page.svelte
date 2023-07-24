@@ -97,6 +97,9 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Settings | LinkedIn't</title>
+</svelte:head>
 <form>
 	<Paper class="mb-40">
 		<Flex align="center">

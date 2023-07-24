@@ -34,6 +34,9 @@
 	];
 </script>
 
+<svelte:head>
+	<title>Projects | LinkedIn't</title>
+</svelte:head>
 <FirebaseApp {auth} {firestore}>
 	<Collection ref="/projects" let:data={projects}>
 		{#each projects as project}

@@ -11,6 +11,11 @@
 	});
 </script>
 
+<svelte:head>
+	<title>LinkedIn't</title>
+	<meta name="author" content="Linkedn't Team">
+	<meta name="description" content="A service for students to find teammates for their projects">
+</svelte:head>
 <SvelteUIProvider class={customTheme}>
 	<slot />
 </SvelteUIProvider>

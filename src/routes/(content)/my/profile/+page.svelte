@@ -8,6 +8,9 @@
 	import { goto } from '$app/navigation';
 </script>
 
+<svelte:head>
+	<title>My profile | LinkedIn't</title>
+</svelte:head>
 <FirebaseApp {auth} {firestore}>
 	<User let:user>
 		<Doc ref={`users/${user.uid}`} let:data={userData} let:ref={userDataRef}>
