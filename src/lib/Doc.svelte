@@ -2,6 +2,11 @@
 	import type { DocumentReference, Firestore } from 'firebase/firestore';
 	import { docStore, sdk } from './stores';
 
+	interface $$Slots {
+		default: { data: any; ref: DocumentReference | null };
+		loading: NonNullable<unknown>;
+	}
+
 	export let ref: string | DocumentReference;
 	export let firestore: Firestore = $sdk?.firestore;
 	export let startWith: any = undefined;

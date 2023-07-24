@@ -1,6 +1,11 @@
 <script lang="ts">
-	import type { Auth } from 'firebase/auth';
+	import type { Auth, User } from 'firebase/auth';
 	import { sdk, userStore } from './stores';
+
+	interface $$Slots {
+		default: { user: User };
+		signedOut: NonNullable<unknown>;
+	}
 
 	export let auth: Auth = $sdk?.auth;
 
