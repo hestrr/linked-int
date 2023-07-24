@@ -8,7 +8,6 @@
 		type DocumentData,
 		query,
 		where,
-		getDoc,
 		addDoc
 	} from 'firebase/firestore';
 	import { Cross2 } from 'radix-icons-svelte';
@@ -91,7 +90,7 @@
 </svelte:head>
 
 <FirebaseApp {auth} {firestore}>
-	<User let:user>
+	<User>
 		<Paper class="mb-40 rounded-xl px-[8%] py-[5%]">
 			<Title order={1}><b>New project</b></Title>
 			<Stack spacing="sm" class="w-2/5 mt-8">
