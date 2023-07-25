@@ -17,7 +17,7 @@
 	import List from '~icons/ph/list-fill';
 	import Bell from '~icons/mdi/bell';
 	import { goto } from '$app/navigation';
-	import { auth, firestore, FirebaseApp, User, logout } from '$lib';
+	import { auth, firestore, FirebaseApp, User } from '$lib';
 
 	// const MagnifyingGlassTS = MagnifyingGlass as unknown as undefined;
 </script>
@@ -34,7 +34,7 @@
 			<!--				variant="filled"-->
 			<!--			/>-->
 			<User>
-				<button on:click={() => logout()} class="ml-auto mr-44">
+				<button class="ml-auto mr-44">
 					<Skeleton circle height={50} />
 				</button>
 				<div slot="signedOut" class="w-[17%] h-full ml-auto mr-[3%]">

@@ -3,7 +3,7 @@
 	import Telegram from '~icons/fa6-brands/telegram';
 	import Behance from '~icons/devicon-plain/behance';
 	import { GithubLogo } from 'radix-icons-svelte';
-	import { Doc, User, auth, firestore } from '$lib';
+	import { Doc, User, auth, firestore, logout } from '$lib';
 	import FirebaseApp from '$lib/FirebaseApp.svelte';
 	import { goto } from '$app/navigation';
 </script>
@@ -14,7 +14,7 @@
 <FirebaseApp {auth} {firestore}>
 	<User let:user>
 		<Doc ref={`users/${user.uid}`} let:data={userData}>
-			<Paper class="mb-40">
+			<Paper class="mb-40 px-14 py-10">
 				<Flex align="center">
 					<Skeleton circle height={125} />
 					<Flex class="ml-[5%] w-[80%]" justify="space-between">
@@ -66,6 +66,9 @@
 						{/if}
 					</Flex>
 				</Stack>
+				<Button variant="subtle" color="red" size="lg" on:click={() => logout()} class="p-2 mt-8"
+					>Log out</Button
+				>
 			</Paper>
 		</Doc>
 		<div slot="signedOut">Login to see your profile</div>
