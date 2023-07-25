@@ -2,6 +2,7 @@
 	import { User, Doc, FirebaseApp, auth, firestore } from '$lib';
 	import { Flex, Paper, Skeleton, Stack, Title, Text, Button, Group } from '@svelteuidev/core';
 	import LeftArrow from '~icons/teenyicons/arrow-solid';
+	import { goto } from '$app/navigation';
 
 	export let data: { project_id: string };
 </script>
@@ -23,15 +24,23 @@
 				<Flex class="w-full flex-wrap">
 					{#each projectData.contributors as contributorRef}
 						<Flex class="w-1/2 mt-[3%]">
-							<Skeleton circle height={75} />
-							<Doc ref={contributorRef} let:data={contributor}>
-								<Stack class="ml-5">
-									<p class="text-xl -mt-2">
-										{`${contributor.name} ${contributor.surname}`}
-									</p>
-									<p class="-mt-4 text-sm text-[#6E6E6E]">{contributor.year}</p>
-								</Stack>
-							</Doc>
+							<button
+								class="flex w-full h-full"
+								style="text-align: start"
+								on:click={() => goto('/user/' + contributorRef.split('/')[1])}
+							>
+								<Flex>
+									<Skeleton circle height={75} />
+									<Doc ref={contributorRef} let:data={contributor}>
+										<Stack class="ml-5">
+											<p class="text-xl -mt-2">
+												{`${contributor.name} ${contributor.surname}`}
+											</p>
+											<p class="-mt-4 text-sm text-[#6E6E6E]">{contributor.year}</p>
+										</Stack>
+									</Doc>
+								</Flex>
+							</button>
 						</Flex>
 					{/each}
 				</Flex>

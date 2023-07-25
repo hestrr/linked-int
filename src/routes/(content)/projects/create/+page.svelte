@@ -2,15 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { User, Doc, FirebaseApp, auth, firestore } from '$lib';
 	import { Flex, Paper, Skeleton, Stack, Title, Textarea, Button } from '@svelteuidev/core';
-	import {
-		collection,
-		getDocs,
-		type DocumentData,
-		query,
-		where,
-		getDoc,
-		addDoc
-	} from 'firebase/firestore';
+	import { collection, getDocs, type DocumentData, query, where, addDoc } from 'firebase/firestore';
 	import { Cross2 } from 'radix-icons-svelte';
 	import { onMount } from 'svelte';
 
