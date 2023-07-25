@@ -28,7 +28,7 @@
 
 	async function deleteProject() {
 		await deleteDoc(doc(firestore, 'projects', data.project_id));
-		goto('/projects');
+		await goto('/projects');
 	}
 
 	onMount(async () => {

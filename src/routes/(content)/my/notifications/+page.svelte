@@ -72,7 +72,7 @@
 	async function acceptIncomingInvite(notification: IncomingInvite, notificationRefId: string) {
 		const project = await getDoc(notification.project);
 		const contributors = project.data()?.contributors;
-		contributors.push(notification.admin);
+		contributors.push(doc(firestore, 'users', `${auth.currentUser?.uid}`));
 		await setDoc(notification.project, { ...project.data(), contributors });
 		await deleteDoc(
 			doc(firestore, `users/${auth.currentUser?.uid}/notifications`, notificationRefId)

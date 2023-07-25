@@ -86,7 +86,7 @@
 			title,
 			tags,
 			description,
-			contributors,
+			contributors: [contributors[0]],
 			admin: auth.currentUser ? doc(firestore, 'users', auth.currentUser.uid) : undefined
 		});
 		for (let i = 1; i < contributors.length; ++i) {
