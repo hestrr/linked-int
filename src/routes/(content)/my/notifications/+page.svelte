@@ -9,6 +9,13 @@
 		requester: DocumentReference;
 	}
 
+	interface AnswerJoin {
+		type: string;
+		project: DocumentReference;
+		admin: DocumentReference;
+		success: boolean;
+	}
+
 	async function acceptIncomingJoin(notification: IncomingJoin, notificationRefId: string) {
 		const project = await getDoc(notification.project);
 		const contributors = project.data()?.contributors;
@@ -17,10 +24,36 @@
 		await deleteDoc(
 			doc(firestore, `users/${auth.currentUser?.uid}/notifications`, notificationRefId)
 		);
+		await setDoc(
+			doc(
+				firestore,
+				`users/${notification.requester.id}/notifications`,
+				`ij-${auth.currentUser?.uid}-${notification.requester.id}`
+			),
+			{
+				type: 'answer_join',
+				project: notification.project,
+				admin: doc(firestore, 'users', `${auth.currentUser?.uid}`),
+				success: true
+			} as AnswerJoin
+		);
 	}
-	async function declineIncomingJoin(notificationRefId: string) {
+	async function declineIncomingJoin(notification: IncomingJoin, notificationRefId: string) {
 		await deleteDoc(
 			doc(firestore, `users/${auth.currentUser?.uid}/notifications`, notificationRefId)
+		);
+		await setDoc(
+			doc(
+				firestore,
+				`users/${notification.requester.id}/notifications`,
+				`ij-${auth.currentUser?.uid}-${notification.requester.id}`
+			),
+			{
+				type: 'answer_join',
+				project: notification.project,
+				admin: doc(firestore, 'users', `${auth.currentUser?.uid}`),
+				success: false
+			} as AnswerJoin
 		);
 	}
 </script>
@@ -104,7 +137,8 @@
 											variant="white"
 											color="red"
 											class="text-lg"
-											on:click={() => declineIncomingJoin(notificationRef.id)}>Decline</Button
+											on:click={() => declineIncomingJoin(notification, notificationRef.id)}
+											>Decline</Button
 										>
 									</Flex>
 								{/if}
