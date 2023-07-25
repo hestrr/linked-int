@@ -9,7 +9,8 @@
 		query,
 		where,
 		addDoc,
-		doc
+		doc,
+		setDoc
 	} from 'firebase/firestore';
 	import { Cross2 } from 'radix-icons-svelte';
 	import { onMount } from 'svelte';
@@ -81,13 +82,29 @@
 	}
 
 	async function submitProject() {
-		await addDoc(collection(firestore, 'projects'), {
+		const projectReference = await addDoc(collection(firestore, 'projects'), {
 			title,
 			tags,
 			description,
 			contributors,
 			admin: auth.currentUser ? doc(firestore, 'users', auth.currentUser.uid) : undefined
 		});
+		for (let i = 1; i < contributors.length; ++i) {
+			const contributorId = contributors[i].split('/')[1];
+			console.log(`${contributors[i]}/notifications`);
+			await setDoc(
+				doc(
+					firestore,
+					`${contributors[i]}/notifications`,
+					`ii-${auth.currentUser?.uid}-${contributorId}-${projectReference.id}`
+				),
+				{
+					type: 'incoming_invite',
+					admin: doc(firestore, 'users', `${auth.currentUser?.uid}`),
+					project: doc(firestore, 'projects', projectReference.id)
+				}
+			);
+		}
 		goto('/projects');
 	}
 </script>

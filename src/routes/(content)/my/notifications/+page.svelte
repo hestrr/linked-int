@@ -16,6 +16,19 @@
 		success: boolean;
 	}
 
+	interface IncomingInvite {
+		type: string;
+		project: DocumentReference;
+		admin: DocumentReference;
+	}
+
+	interface AnswerInvite {
+		type: string;
+		project: DocumentReference;
+		requester: DocumentReference;
+		success: boolean;
+	}
+
 	async function acceptIncomingJoin(notification: IncomingJoin, notificationRefId: string) {
 		const project = await getDoc(notification.project);
 		const contributors = project.data()?.contributors;
@@ -28,7 +41,7 @@
 			doc(
 				firestore,
 				`users/${notification.requester.id}/notifications`,
-				`ij-${auth.currentUser?.uid}-${notification.requester.id}`
+				`ij-${auth.currentUser?.uid}-${notification.requester.id}-${project.id}`
 			),
 			{
 				type: 'answer_join',
@@ -46,7 +59,7 @@
 			doc(
 				firestore,
 				`users/${notification.requester.id}/notifications`,
-				`ij-${auth.currentUser?.uid}-${notification.requester.id}`
+				`ij-${auth.currentUser?.uid}-${notification.requester.id}-${notification.project.id}`
 			),
 			{
 				type: 'answer_join',
@@ -54,6 +67,46 @@
 				admin: doc(firestore, 'users', `${auth.currentUser?.uid}`),
 				success: false
 			} as AnswerJoin
+		);
+	}
+	async function acceptIncomingInvite(notification: IncomingInvite, notificationRefId: string) {
+		const project = await getDoc(notification.project);
+		const contributors = project.data()?.contributors;
+		contributors.push(notification.admin);
+		await setDoc(notification.project, { ...project.data(), contributors });
+		await deleteDoc(
+			doc(firestore, `users/${auth.currentUser?.uid}/notifications`, notificationRefId)
+		);
+		await setDoc(
+			doc(
+				firestore,
+				`users/${notification.admin.id}/notifications`,
+				`ii-${auth.currentUser?.uid}-${notification.admin.id}-${notification.project.id}`
+			),
+			{
+				type: 'answer_invite',
+				project: notification.project,
+				requester: doc(firestore, 'users', `${auth.currentUser?.uid}`),
+				success: true
+			} as AnswerInvite
+		);
+	}
+	async function declineIncomingInvite(notification: IncomingInvite, notificationRefId: string) {
+		await deleteDoc(
+			doc(firestore, `users/${auth.currentUser?.uid}/notifications`, notificationRefId)
+		);
+		await setDoc(
+			doc(
+				firestore,
+				`users/${notification.admin.id}/notifications`,
+				`ii-${auth.currentUser?.uid}-${notification.admin.id}-${notification.project.id}`
+			),
+			{
+				type: 'answer_invite',
+				project: notification.project,
+				requester: doc(firestore, 'users', `${auth.currentUser?.uid}`),
+				success: false
+			} as AnswerInvite
 		);
 	}
 </script>
@@ -144,8 +197,20 @@
 								{/if}
 								{#if notification.type === 'incoming_invite'}
 									<Flex>
-										<Button variant="white" color="green" class="text-lg">Accept</Button>
-										<Button variant="white" color="red" class="text-lg">Decline</Button>
+										<Button
+											variant="white"
+											color="green"
+											class="text-lg"
+											on:click={() => acceptIncomingInvite(notification, notificationRef.id)}
+											>Accept</Button
+										>
+										<Button
+											variant="white"
+											color="red"
+											class="text-lg"
+											on:click={() => declineIncomingInvite(notification, notificationRef.id)}
+											>Decline</Button
+										>
 									</Flex>
 								{/if}
 							</Stack>

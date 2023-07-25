@@ -3,7 +3,7 @@
 	import { Flex, Paper, Skeleton, Stack, Title, Text, Button, Group } from '@svelteuidev/core';
 	import LeftArrow from '~icons/teenyicons/arrow-solid';
 	import { goto } from '$app/navigation';
-	import { doc, getDoc, setDoc } from 'firebase/firestore';
+	import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 	import { onMount } from 'svelte';
 
 	export let data: { project_id: string };
@@ -11,12 +11,24 @@
 	let projectStatus: 'unrelated' | 'requestSent' | 'alreadyJoined' = 'unrelated';
 
 	function handleJoin(currentUserUID: string, adminUID: string) {
-		setDoc(doc(firestore, `users/${adminUID}/notifications`, `ij-${currentUserUID}-${adminUID}`), {
-			type: 'incoming_join',
-			requester: doc(firestore, 'users', currentUserUID),
-			project: doc(firestore, 'projects', data.project_id)
-		});
+		setDoc(
+			doc(
+				firestore,
+				`users/${adminUID}/notifications`,
+				`ij-${currentUserUID}-${adminUID}-${data.project_id}`
+			),
+			{
+				type: 'incoming_join',
+				requester: doc(firestore, 'users', currentUserUID),
+				project: doc(firestore, 'projects', data.project_id)
+			}
+		);
 		projectStatus = 'requestSent';
+	}
+
+	async function deleteProject() {
+		await deleteDoc(doc(firestore, 'projects', data.project_id));
+		goto('/projects');
 	}
 
 	onMount(async () => {
@@ -30,7 +42,7 @@
 			doc(
 				firestore,
 				`users/${project?.admin.id}/notifications`,
-				`ij-${auth.currentUser?.uid}-${project?.admin.id}`
+				`ij-${auth.currentUser?.uid}-${project?.admin.id}-${data.project_id}`
 			)
 		);
 		if (request.exists()) {
@@ -86,27 +98,38 @@
 						</Paper>
 					{/each}
 				</Group>
-				{#if projectStatus === 'requestSent'}
-					<Button
-						class="rounded-3xl px-[8%] py-[4%] text-2xl mt-[5%]"
-						color="#7DC9BC"
-						disabled={true}
-						on:click={() => handleJoin(user.uid, projectData.admin.id)}>Request sent</Button
-					>
-				{:else if projectStatus === 'alreadyJoined'}
-					<Button
-						class="rounded-3xl px-[8%] py-[4%] text-2xl mt-[5%]"
-						color="#7DC9BC"
-						disabled={true}
-						on:click={() => handleJoin(user.uid, projectData.admin.id)}>Already in project</Button
-					>
-				{:else}
-					<Button
-						class="rounded-3xl px-[8%] py-[4%] text-2xl mt-[5%]"
-						color="#7DC9BC"
-						on:click={() => handleJoin(user.uid, projectData.admin.id)}>Join</Button
-					>
-				{/if}
+				<Flex class="flex-wrap items-end">
+					{#if projectStatus === 'requestSent'}
+						<Button
+							class="rounded-3xl px-[8%] py-[4%] text-2xl mt-[5%]"
+							color="#7DC9BC"
+							disabled={true}
+							on:click={() => handleJoin(user.uid, projectData.admin.id)}>Request sent</Button
+						>
+					{:else if projectStatus === 'alreadyJoined'}
+						<Button
+							class="rounded-3xl px-[8%] py-[4%] text-2xl mt-[5%]"
+							color="#7DC9BC"
+							disabled={true}
+							on:click={() => handleJoin(user.uid, projectData.admin.id)}>Already in project</Button
+						>
+					{:else}
+						<Button
+							class="rounded-3xl px-[8%] py-[4%] text-2xl mt-[5%]"
+							color="#7DC9BC"
+							on:click={() => handleJoin(user.uid, projectData.admin.id)}>Join</Button
+						>
+					{/if}
+					{#if projectData.admin.id === user.uid}
+						<Button
+							class="ml-[10%]"
+							size={'lg'}
+							variant="subtle"
+							color="red"
+							on:click={deleteProject}>Delete project</Button
+						>
+					{/if}
+				</Flex>
 			</Paper>
 		</Doc>
 	</User>
