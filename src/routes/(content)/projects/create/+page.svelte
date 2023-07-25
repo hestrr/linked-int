@@ -73,7 +73,13 @@
 	}
 
 	async function submitProject() {
-		await addDoc(collection(firestore, 'projects'), { title, tags, description, contributors });
+		await addDoc(collection(firestore, 'projects'), {
+			title,
+			tags,
+			description,
+			contributors,
+			admin: auth.currentUser ? auth.currentUser.uid : undefined
+		});
 		goto('/projects');
 	}
 </script>
