@@ -11,8 +11,12 @@
 	let password = '' as string;
 
 	async function handleLogin() {
-		await login(email, password).then(() => {
-			goto('/projects');
+		await login(email, password).then((error) => {
+			if (error) {
+				alert(`Error logging in: ${error}`);
+			} else {
+				goto('/projects');
+			}
 		});
 	}
 </script>

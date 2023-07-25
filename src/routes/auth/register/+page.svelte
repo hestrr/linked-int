@@ -20,6 +20,11 @@
 	async function handleRegistration() {
 		let user = await register(email, password);
 
+		if (typeof user == 'string') {
+			alert(`Error signing up: ${user}`);
+			return;
+		}
+
 		await setDoc(doc(firestore, '/users', user.uid), {
 			email: email,
 			username: username,

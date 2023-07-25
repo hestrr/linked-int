@@ -12,17 +12,23 @@ const firebaseAuth: Auth = getAuth(firebaseApp);
 
 let user: User | null = null;
 
-const login = async (email: string, password: string): Promise<void> => {
-	const userCredentials = await signInWithEmailAndPassword(firebaseAuth, email, password);
-	user = userCredentials.user;
+const login = async (email: string, password: string): Promise<void | string> => {
+	try {
+		const userCredentials = await signInWithEmailAndPassword(firebaseAuth, email, password);
+		user = userCredentials.user;
+	} catch (error: any) {
+		return error.message;
+	}
 };
 
-const register = async (email: string, password: string): Promise<User> => {
-	const userCredentials = await createUserWithEmailAndPassword(firebaseAuth, email, password);
-
-	user = userCredentials.user;
-
-	return user;
+const register = async (email: string, password: string): Promise<User | string> => {
+	try {
+		const userCredentials = await createUserWithEmailAndPassword(firebaseAuth, email, password);
+		user = userCredentials.user;
+		return user;
+	} catch (error: any) {
+		return error.message;
+	}
 };
 const logout = async (): Promise<void> => {
 	await signOut(firebaseAuth);
