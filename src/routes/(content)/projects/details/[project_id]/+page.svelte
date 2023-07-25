@@ -29,11 +29,11 @@
 		const request = await getDoc(
 			doc(
 				firestore,
-				`users/${project?.admin.path.id}/notifications`,
-				`ij-${auth.currentUser?.uid}-${project?.admin.path.id}`
+				`users/${project?.admin.id}/notifications`,
+				`ij-${auth.currentUser?.uid}-${project?.admin.id}`
 			)
 		);
-		if (request) {
+		if (request.exists()) {
 			projectStatus = 'requestSent';
 		}
 	});
