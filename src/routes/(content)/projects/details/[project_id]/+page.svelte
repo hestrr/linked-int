@@ -3,8 +3,40 @@
 	import { Flex, Paper, Skeleton, Stack, Title, Text, Button, Group } from '@svelteuidev/core';
 	import LeftArrow from '~icons/teenyicons/arrow-solid';
 	import { goto } from '$app/navigation';
+	import { doc, getDoc, setDoc } from 'firebase/firestore';
+	import { onMount } from 'svelte';
 
 	export let data: { project_id: string };
+
+	let projectStatus: 'unrelated' | 'requestSent' | 'alreadyJoined' = 'unrelated';
+
+	function handleJoin(currentUserUID: string, adminUID: string) {
+		setDoc(doc(firestore, `users/${adminUID}/notifications`, `ij-${currentUserUID}-${adminUID}`), {
+			type: 'incoming_join',
+			requester: doc(firestore, 'users', currentUserUID),
+			project: doc(firestore, 'projects', data.project_id)
+		});
+		projectStatus = 'requestSent';
+	}
+
+	onMount(async () => {
+		const projectSnapshot = await getDoc(doc(firestore, 'projects', data.project_id));
+		const project = projectSnapshot.data();
+		if (project?.contributors.includes(doc(firestore, 'users', `${auth.currentUser?.uid}`).path)) {
+			projectStatus = 'alreadyJoined';
+			return;
+		}
+		const request = await getDoc(
+			doc(
+				firestore,
+				`users/${project?.admin.path.id}/notifications`,
+				`ij-${auth.currentUser?.uid}-${project?.admin.path.id}`
+			)
+		);
+		if (request) {
+			projectStatus = 'requestSent';
+		}
+	});
 </script>
 
 <svelte:head>
@@ -12,7 +44,7 @@
 </svelte:head>
 
 <FirebaseApp {auth} {firestore}>
-	<User>
+	<User let:user>
 		<Doc ref={`projects/${data.project_id}`} let:data={projectData}>
 			<Paper class="mb-40 rounded-xl px-[8%] py-[5%]">
 				<a href="/projects" class="flex items-center text-xl text-[#3C7E82]"
@@ -54,7 +86,27 @@
 						</Paper>
 					{/each}
 				</Group>
-				<Button class="rounded-3xl px-[8%] py-[4%] text-2xl mt-[5%]" color="#7DC9BC">Join</Button>
+				{#if projectStatus === 'requestSent'}
+					<Button
+						class="rounded-3xl px-[8%] py-[4%] text-2xl mt-[5%]"
+						color="#7DC9BC"
+						disabled={true}
+						on:click={() => handleJoin(user.uid, projectData.admin.id)}>Request sent</Button
+					>
+				{:else if projectStatus === 'alreadyJoined'}
+					<Button
+						class="rounded-3xl px-[8%] py-[4%] text-2xl mt-[5%]"
+						color="#7DC9BC"
+						disabled={true}
+						on:click={() => handleJoin(user.uid, projectData.admin.id)}>Already in project</Button
+					>
+				{:else}
+					<Button
+						class="rounded-3xl px-[8%] py-[4%] text-2xl mt-[5%]"
+						color="#7DC9BC"
+						on:click={() => handleJoin(user.uid, projectData.admin.id)}>Join</Button
+					>
+				{/if}
 			</Paper>
 		</Doc>
 	</User>

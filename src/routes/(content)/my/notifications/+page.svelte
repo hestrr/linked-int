@@ -1,6 +1,28 @@
-<script>
+<script lang="ts">
 	import { Doc, Collection, FirebaseApp, auth, firestore, User } from '$lib';
 	import { Paper, Flex, Skeleton, Stack, Button } from '@svelteuidev/core';
+	import { DocumentReference, deleteDoc, doc, setDoc, getDoc } from 'firebase/firestore';
+
+	interface IncomingJoin {
+		type: string;
+		project: DocumentReference;
+		requester: DocumentReference;
+	}
+
+	async function acceptIncomingJoin(notification: IncomingJoin, notificationRefId: string) {
+		const project = await getDoc(notification.project);
+		const contributors = project.data()?.contributors;
+		contributors.push(notification.requester);
+		await setDoc(notification.project, { ...project.data(), contributors });
+		await deleteDoc(
+			doc(firestore, `users/${auth.currentUser?.uid}/notifications`, notificationRefId)
+		);
+	}
+	async function declineIncomingJoin(notificationRefId: string) {
+		await deleteDoc(
+			doc(firestore, `users/${auth.currentUser?.uid}/notifications`, notificationRefId)
+		);
+	}
 </script>
 
 <svelte:head>
@@ -69,7 +91,24 @@
 										</Doc>
 									</p>
 								{/if}
-								{#if notification.type === 'incoming_join' || notification.type === 'incoming_invite'}
+								{#if notification.type === 'incoming_join'}
+									<Flex>
+										<Button
+											variant="white"
+											color="green"
+											class="text-lg"
+											on:click={() => acceptIncomingJoin(notification, notificationRef.id)}
+											>Accept</Button
+										>
+										<Button
+											variant="white"
+											color="red"
+											class="text-lg"
+											on:click={() => declineIncomingJoin(notificationRef.id)}>Decline</Button
+										>
+									</Flex>
+								{/if}
+								{#if notification.type === 'incoming_invite'}
 									<Flex>
 										<Button variant="white" color="green" class="text-lg">Accept</Button>
 										<Button variant="white" color="red" class="text-lg">Decline</Button>
@@ -80,6 +119,9 @@
 					</Flex>
 				</Paper>
 			{/each}
+			{#if notificationRefs.length === 0}
+				You don't have any notifications yet
+			{/if}
 		</Collection>
 	</User>
 </FirebaseApp>
