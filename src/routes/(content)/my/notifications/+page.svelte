@@ -123,5 +123,6 @@
 				You don't have any notifications yet
 			{/if}
 		</Collection>
+		<div slot="signedOut">Login to see your notifications</div>
 	</User>
 </FirebaseApp>

@@ -51,5 +51,6 @@
 				{/if}
 			{/each}
 		</Collection>
+		<div slot="signedOut">Login to see your projects</div>
 	</User>
 </FirebaseApp>
