@@ -6,6 +6,10 @@
 	export let data: { project_id: string };
 </script>
 
+<svelte:head>
+	<title>Project Details | LinkedIn't</title>
+</svelte:head>
+
 <FirebaseApp {auth} {firestore}>
 	<User>
 		<Doc ref={`projects/${data.project_id}`} let:data={projectData}>

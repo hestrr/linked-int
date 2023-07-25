@@ -81,7 +81,13 @@
 	}
 
 	async function submitProject() {
-		await addDoc(collection(firestore, 'projects'), { title, tags, description, contributors });
+		await addDoc(collection(firestore, 'projects'), {
+			title,
+			tags,
+			description,
+			contributors,
+			admin: auth.currentUser ? auth.currentUser.uid : undefined
+		});
 		goto('/projects');
 	}
 </script>
@@ -91,7 +97,7 @@
 </svelte:head>
 
 <FirebaseApp {auth} {firestore}>
-	<User let:user>
+	<User>
 		<Paper class="mb-40 rounded-xl px-[8%] py-[5%]">
 			<Title order={1}><b>New project</b></Title>
 			<Stack spacing="sm" class="w-2/5 mt-8">
